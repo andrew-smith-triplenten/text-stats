@@ -3,6 +3,8 @@
 This is the only module that decides what the output looks like.
 """
 
+import json
+
 from stats import count_blank_lines, count_characters, count_lines, count_words
 
 #: Every statistic the report shows, in the order it shows them, as
@@ -25,6 +27,11 @@ def format_text(stats: dict[str, int]) -> str:
     width = max(len(label) for label, _ in STATISTICS.values())
     rows = [f"{STATISTICS[key][0]:<{width}}  {value}" for key, value in stats.items()]
     return "\n".join(rows)
+
+
+def format_json(stats: dict[str, int]) -> str:
+    """Format collected statistics as JSON, preserving their order."""
+    return json.dumps(stats)
 
 
 def build_report(lines: list[str]) -> str:
