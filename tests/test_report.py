@@ -1,3 +1,5 @@
+import json
+
 import report
 
 LINES = ["hello world", "", "again"]
@@ -18,6 +20,15 @@ def test_format_text_puts_each_statistic_on_its_own_line():
     assert len(rows) == 4
     assert rows[0].startswith("Lines")
     assert rows[0].endswith("3")
+
+
+def test_format_json_returns_valid_json_in_mapping_order():
+    stats = {"words": 3, "lines": 2, "characters": 16}
+
+    formatted = report.format_json(stats)
+
+    assert json.loads(formatted) == stats
+    assert list(json.loads(formatted)) == list(stats)
 
 
 def test_build_report_labels_every_statistic():
