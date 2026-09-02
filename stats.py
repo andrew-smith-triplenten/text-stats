@@ -20,6 +20,11 @@ def count_characters(lines: list[str]) -> int:
     return sum(len(line) for line in lines)
 
 
+def longest_line_length(lines: list[str]) -> int:
+    """Return the length of the longest line, excluding its line break."""
+    return max((len(line.rstrip("\r\n")) for line in lines), default=0)
+
+
 def count_words(lines: list[str]) -> int:
     """Count words, where a word is whatever whitespace separates.
 
